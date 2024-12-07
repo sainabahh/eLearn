@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.name }} - Video List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f1f1f1;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        li:hover {
+            background-color: #e2e2e2;
+        }
+        strong {
+            font-size: 1.2em;
+            color: #333;
+        }
+        button {
+            background-color: #ccc;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: not-allowed;
+            font-size: 1em;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        a {
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ course.name }} - Video List</h1>
+
+        <ul>
+            {% for item in video_progress %}
+                <li>
+                    <strong>{{ item.video.title }}</strong>
+                    {% if item.is_locked %}
+                        <button disabled>Locked</button>  <!-- Locked video -->
+                    {% else %}
+                        <a href="{% url 'video_screen' item.video.id %}">Watch</a>  <!-- Link to watch video -->
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</body>
+</html>

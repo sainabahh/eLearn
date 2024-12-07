@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Course</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: white;
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            margin: 50px auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+        select {
+            padding: 10px;
+            width: 100%;
+            margin: 10px 0;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .nav-buttons {
+            margin-top: 30px;
+        }
+        .nav-buttons a {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .nav-buttons a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select a Course</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            <label for="course">Choose a Course:</label>
+            <select name="course_id" id="course">
+                {% for course in courses %}
+                    <option value="{{ course.id }}">{{ course.name }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Select Course</button>
+        </form>
+
+        <div class="nav-buttons">
+            <a href="{% url 'course_list' %}">Back to Courses</a>
+        </div>
+    </div>
+</body>
+</html>
